@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Aplicacao.API</name>
+    </assembly>
+    <members>
+        <member name="T:Aplicacao.API.Controllers.Base.BaseController`2">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="Tid"></typeparam>
+        </member>
+        <member name="F:Aplicacao.API.Controllers.Base.BaseController`2._appService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Aplicacao.API.Controllers.Base.BaseController`2.#ctor(Aplicacao.Application.Interfaces.IAppService{`0,`1})">
+            <Summary>
+             Constructor BaseGetController
+            </Summary>
+        </member>
+        <member name="M:Aplicacao.API.Controllers.Base.BaseController`2.GetAll">
+            <summary>
+            Retorna a lista do objeto com os parâmetros colunaOrdenacao, direcao, qtd and pule        
+            </summary>
+        </member>
+        <member name="M:Aplicacao.API.Controllers.Base.BaseController`2.Get(`1)">
+            <summary>
+            Retorna o objeto  by id
+            </summary>
+            <param name="id">Identificador do objeto</param>
+        </member>
+        <member name="M:Aplicacao.API.Controllers.Base.BaseController`2.Post(`0)">
+            <summary>
+             Criação do objeto
+            </summary>
+            <param name='t'>Objeto</param>
+        </member>
+        <member name="M:Aplicacao.API.Controllers.Base.BaseController`2.Put(`0)">
+            <summary>
+            Atualização do objeto
+            </summary>
+            <param name='t'>Objeto </param>
+        </member>
+        <member name="M:Aplicacao.API.Controllers.Base.BaseController`2.Delete(`1)">
+            <summary>
+            Para deletar um objeto
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Aplicacao.API.Controllers.CustomersController">
+            <summary>
+            Customer
+            </summary>
+        </member>
+        <member name="M:Aplicacao.API.Controllers.CustomersController.#ctor(Aplicacao.Application.Interfaces.ICustomerAppService)">
+            <summary>
+            
+            </summary>
+            <param name="appService"></param>
+        </member>
+        <member name="T:Aplicacao.API.Controllers.OrdersController">
+            <summary>
+            Orders
+            </summary>
+        </member>
+        <member name="M:Aplicacao.API.Controllers.OrdersController.#ctor(Aplicacao.Application.Interfaces.IOrderAppService)">
+            <summary>
+            
+            </summary>
+            <param name="appService"></param>
+        </member>
+        <member name="M:Aplicacao.API.Controllers.PingsController.Get">
+            <summary>
+            Action para testes de disponibilidade. 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Aplicacao.API.Controllers.ProductsController">
+            <summary>
+            Product
+            </summary>
+        </member>
+        <member name="M:Aplicacao.API.Controllers.ProductsController.#ctor(Aplicacao.Application.Interfaces.IProductAppService)">
+            <summary>
+            
+            </summary>
+            <param name="appService"></param>
+        </member>
+        <member name="M:Aplicacao.API.Settings.SwaggerSettings.SwaggerConfigs.UseConfigureSwaggerMITArq(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Configura o Swagger
+            </summary>
+            <param name="app">Aplicação</param>
+        </member>
+        <member name="T:Aplicacao.API.Startup">
+            <summary>
+            Startup class
+            </summary>
+        </member>
+        <member name="M:Aplicacao.API.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Startup constructor
+            </summary>
+            <param name="configuration"></param>
+            <param name="environment"></param>
+        </member>
+        <member name="M:Aplicacao.API.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services"></param>
+        </member>
+    </members>
+</doc>

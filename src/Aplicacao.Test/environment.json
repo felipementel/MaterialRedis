@@ -1,0 +1,12 @@
+{
+  "IsDesenv": false,
+  "Scheme": "https",
+  "Host": "https://localhost:44352/api",
+  "Path": "api",
+  "APNETCORE_ENVIROMENT": "Development",
+  "Port": "44352",
+  "Login": "mitarq",
+  "AccessKey": "mitarq",
+  "UrlToken": "/api/Token/v1",
+  "ApiVersion": "v1"
+}
