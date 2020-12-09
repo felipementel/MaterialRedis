@@ -20,13 +20,13 @@ namespace Aplicacao.Domain.Model
             RegistrationDate = DateTime.Now;
         }
 
-        public string Name { get; private set; } // ValueObject
+        public string Name { get; set; } // ValueObject
 
-        public string Email { get; private set; }
+        public string Email { get; set; }
 
-        public DateTime BirthDate { get; private set; }
+        public DateTime BirthDate { get; set; }
 
-        public DateTime RegistrationDate { get; private set; }
+        public DateTime RegistrationDate { get; set; }
 
         //public string Document { get; private set; } // ValueObject
 

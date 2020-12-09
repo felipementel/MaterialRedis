@@ -4,7 +4,6 @@ using Aplicacao.Application.Interfaces.Access;
 using Aplicacao.Application.Security;
 using Aplicacao.Application.Services;
 using Aplicacao.Application.Services.Access;
-using Aplicacao.Domain.Interfaces.CQRS;
 using Aplicacao.Domain.Interfaces.Repositories;
 using Aplicacao.Domain.Interfaces.Services;
 using Aplicacao.Domain.Services;
@@ -58,7 +57,7 @@ namespace Aplicacao.Infra.CrossCutting
             services.AddScoped<IOrderRedisRepository, OrderRedisRepository>();
 
             //MessageBroker
-            services.AddScoped<IMediatorHandler, AzureServiceBusQueue>();
+            //services.AddScoped<IMediatorHandler, AzureServiceBusQueue>();
         }
 
         public static void SetSecurity(this IServiceCollection services, Microsoft.Extensions.Configuration.IConfiguration configuration)

@@ -24,6 +24,7 @@ namespace Aplicacao.Infra.DataAccess.Repositories
 
             if (!string.IsNullOrEmpty(dadosCache))
             {
+                T temp = JsonConvert.DeserializeObject<T>(dadosCache);
                 return JsonConvert.DeserializeObject<T>(dadosCache);
             }
             else
