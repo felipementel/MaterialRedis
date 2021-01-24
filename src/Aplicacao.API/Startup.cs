@@ -72,6 +72,11 @@ namespace Aplicacao.API
                     options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                     options.SerializerSettings.Formatting = Formatting.Indented;
                 })
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.WriteIndented = true;
+                    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+                })
                 .ConfigureApiBehaviorOptions(options =>
                 {
                     options.InvalidModelStateResponseFactory = context =>
@@ -84,6 +89,7 @@ namespace Aplicacao.API
                         return result;
                     };
                 });
+                
 
 
             if (_environment.IsDevelopment())
@@ -106,21 +112,23 @@ namespace Aplicacao.API
 
             services
                 .AddLogging(loggingBuilder =>
-            {
-                loggingBuilder.AddConfiguration(_configuration.GetSection("Logging"));
-                loggingBuilder.AddConsole();
-                loggingBuilder.AddDebug();
-            });
+                {
+                    loggingBuilder.AddConfiguration(_configuration.GetSection("Logging"));
+                    loggingBuilder.AddConsole();
+                    loggingBuilder.AddDebug();
+                });
 
             services
                 .AddDbContext<DbContext, AplicacaoContext>(opt => opt
-                .UseSqlServer(_configuration.GetConnectionString("Aplicacao")
+                .UseSqlServer(_configuration.GetConnectionString("AzureDatabase")
                 , options =>
                 {
-                    options.EnableRetryOnFailure(
-                        maxRetryCount: 10,
-                        maxRetryDelay: TimeSpan.FromSeconds(30),
-                        errorNumbersToAdd: null);
+                    options
+                    //.EnableRetryOnFailure(
+                    //    maxRetryCount: 3,
+                    //    maxRetryDelay: TimeSpan.FromSeconds(4),
+                    //    errorNumbersToAdd: null)
+                    .MigrationsHistoryTable("MigracoesEFAplicacao", "dbo");
                 }
                 )
                 .EnableSensitiveDataLogging(_environment.IsDevelopment())
@@ -129,10 +137,10 @@ namespace Aplicacao.API
 
             services
                 .AddStackExchangeRedisCache(options =>
-            {
-                options.Configuration = _configuration.GetConnectionString("Redis");
-                options.InstanceName = "Aplicacao-";
-            });
+                {
+                    options.Configuration = _configuration.GetConnectionString("Redis");
+                    options.InstanceName = "Aplicacao-";
+                });
 
             //https://docs.microsoft.com/pt-br/aspnet/core/fundamentals/configuration/options?view=aspnetcore-3.1
             services

@@ -17,6 +17,15 @@ namespace Aplicacao.Domain.Model
             Price = price;
         }
 
+        public Product(int id, string description, float weight, string sKU, decimal price)
+        {
+            Id = id;
+            Description = description;
+            Weight = weight;
+            SKU = sKU;
+            Price = price;
+        }
+
         public string Description { get; private set; }
 
         public float Weight { get; private set; }

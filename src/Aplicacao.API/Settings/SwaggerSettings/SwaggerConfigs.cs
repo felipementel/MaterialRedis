@@ -18,7 +18,7 @@ namespace Aplicacao.API.Settings.SwaggerSettings
             {
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "API Demo - JunDevelopers",
+                    Title = "API Demo - Avanade Brasil",
                     Version = "v1",
                     Description = $"Parameters: </br>" +
                     $" - EnvironmentName: {environment.EnvironmentName} </br>" +

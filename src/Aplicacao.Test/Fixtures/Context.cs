@@ -1,7 +1,5 @@
-﻿using Aplication.Util;
-using Finjan.Integracao.Dynamics.Tests.Model;
+﻿using Finjan.Integracao.Dynamics.Tests.Model;
 using Newtonsoft.Json;
-using System;
 using System.IO;
 using System.Reflection;
 

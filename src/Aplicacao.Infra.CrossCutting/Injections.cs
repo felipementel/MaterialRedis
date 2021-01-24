@@ -12,7 +12,6 @@ using Aplicacao.Domain.Validations;
 using Aplicacao.Infra.DataAccess;
 using Aplicacao.Infra.DataAccess.Repositories.Redis;
 using Aplicacao.Infra.DataAccess.Repositories.SQL;
-using Aplicacao.Infra.MessageBroker;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;

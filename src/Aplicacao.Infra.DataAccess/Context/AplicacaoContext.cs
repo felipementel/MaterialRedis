@@ -1,7 +1,9 @@
 ﻿using Aplicacao.Domain.Model;
 using Aplicacao.Infra.DataAccess.Map;
+using Aplicacao.Infra.DataAccess.Seed;
 using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Aplicacao.Infra.DataAccess.Context
 {
@@ -34,16 +36,19 @@ namespace Aplicacao.Infra.DataAccess.Context
             //Seed
             //modelBuilder.ApplyConfiguration(new ProductSeed());
 
-            //foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
-            //{
-            //    relationship.DeleteBehavior = DeleteBehavior.Restrict;
-            //}
+            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+            }
 
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AplicacaoContext).Assembly);
+            MapearPropriedadesEsquecidas(modelBuilder);
+
+            //base.OnModelCreating(modelBuilder);
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            base.OnConfiguring(optionsBuilder);
+            //base.OnConfiguring(optionsBuilder);
 
             //if (!optionsBuilder.IsConfigured)
             //{                
@@ -56,6 +61,24 @@ namespace Aplicacao.Infra.DataAccess.Context
             //    optionsBuilder.UseSqlServer(connectionString, x => x.EnableRetryOnFailure())
             //    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             //}
+        }
+
+        private void MapearPropriedadesEsquecidas(ModelBuilder modelBuilder)
+        {
+            foreach (var item in modelBuilder.Model.GetEntityTypes())
+            {
+                var prop = item.GetProperties().Where(c => c.ClrType == typeof(string));
+
+                foreach (var itemProp in prop)
+                {
+                    if (string.IsNullOrEmpty(itemProp.GetColumnType())
+                        && !itemProp.GetMaxLength().HasValue)
+                    {
+                        //itemProp.SetMaxLength(100);
+                        itemProp.SetColumnType("VARCHAR(100)");
+                    }
+                }
+            }
         }
     }
 }

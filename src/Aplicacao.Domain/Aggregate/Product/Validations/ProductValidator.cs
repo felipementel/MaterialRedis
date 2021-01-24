@@ -7,12 +7,12 @@ namespace Aplicacao.Domain.Validations
     {
         public ProductValidator()
         {
-            //RuleSet("new", () =>
-            //{
-            //    RuleFor(n => n.Price).NotEmpty().WithMessage("{{PropertyName}} não pode ser nulo.");
-            //});
+            RuleSet("new", () =>
+            {
+                RuleFor(n => n.Price).NotEmpty().WithMessage("{{PropertyName}} não pode ser nulo.");
+            });
 
-            RuleFor(n => n.Price).NotEmpty().WithMessage("{{PropertyName}} não pode ser nulo.");
+            //RuleFor(n => n.Price).NotEmpty().WithMessage("{{PropertyName}} não pode ser nulo.");
         }
     }
 }

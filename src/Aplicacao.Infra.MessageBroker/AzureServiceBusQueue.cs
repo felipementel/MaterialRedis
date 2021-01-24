@@ -1,9 +1,8 @@
 ﻿using Aplicacao.Domain.Interfaces.CQRS;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
-using System;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Aplicacao.Infra.MessageBroker
@@ -22,10 +21,13 @@ namespace Aplicacao.Infra.MessageBroker
 
         public bool EnQueue<T>(T command, string queueName)
         {
-            var message = JsonConvert.SerializeObject(command, Formatting.Indented, new JsonSerializerSettings
+            var options = new JsonSerializerOptions
             {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            });
+                WriteIndented = true,
+                PropertyNameCaseInsensitive = false,
+            };
+
+            var message = JsonSerializer.Serialize(command, options);
 
             SendMessageAsync(message, queueName).Wait();
 

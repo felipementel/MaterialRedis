@@ -11,7 +11,7 @@ namespace Aplicacao.Infra.DataAccess.Seed
         {
             builder.ToTable("Produto");
 
-            //builder.HasData(new Product("IPhone 11", 200, Guid.NewGuid().ToString().Split("-")[0], 799.22M));
+            builder.HasData(new Product(1, "IPhone 12", 200, Guid.NewGuid().ToString().Split("-")[0], 8799.22M));
         }
     }
 }

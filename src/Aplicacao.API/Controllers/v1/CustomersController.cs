@@ -2,7 +2,6 @@
 using Aplicacao.Application.DTOs;
 using Aplicacao.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace Aplicacao.API.Controllers.v1
 {

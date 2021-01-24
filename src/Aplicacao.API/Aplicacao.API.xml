@@ -32,7 +32,7 @@
             </summary>
             <param name="id">Identificador do objeto</param>
         </member>
-        <member name="M:Aplicacao.API.Controllers.Base.BaseController`2.Post(`0)">
+        <member name="M:Aplicacao.API.Controllers.Base.BaseController`2.Post(`0,Microsoft.AspNetCore.Mvc.ApiVersion)">
             <summary>
              Criação do objeto
             </summary>
@@ -51,50 +51,51 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="T:Aplicacao.API.Controllers.CustomersController">
-            <summary>
-            Customer
-            </summary>
-        </member>
-        <member name="M:Aplicacao.API.Controllers.CustomersController.#ctor(Aplicacao.Application.Interfaces.ICustomerAppService)">
-            <summary>
-            
-            </summary>
-            <param name="appService"></param>
-        </member>
-        <member name="T:Aplicacao.API.Controllers.OrdersController">
-            <summary>
-            Orders
-            </summary>
-        </member>
-        <member name="M:Aplicacao.API.Controllers.OrdersController.#ctor(Aplicacao.Application.Interfaces.IOrderAppService)">
-            <summary>
-            
-            </summary>
-            <param name="appService"></param>
-        </member>
-        <member name="M:Aplicacao.API.Controllers.PingsController.Get">
+        <member name="M:Aplicacao.API.Controllers.v1.PingsController.Get">
             <summary>
             Action para testes de disponibilidade. 
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Aplicacao.API.Controllers.ProductsController">
+        <member name="T:Aplicacao.API.Controllers.v1.CustomersController">
             <summary>
-            Product
+            Customer
             </summary>
         </member>
-        <member name="M:Aplicacao.API.Controllers.ProductsController.#ctor(Aplicacao.Application.Interfaces.IProductAppService)">
+        <member name="M:Aplicacao.API.Controllers.v1.CustomersController.#ctor(Aplicacao.Application.Interfaces.ICustomerAppService)">
             <summary>
             
             </summary>
             <param name="appService"></param>
         </member>
-        <member name="M:Aplicacao.API.Settings.SwaggerSettings.SwaggerConfigs.UseConfigureSwaggerMITArq(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+        <member name="T:Aplicacao.API.Controllers.v1.OrdersController">
+            <summary>
+            Orders
+            </summary>
+        </member>
+        <member name="M:Aplicacao.API.Controllers.v1.OrdersController.#ctor(Aplicacao.Application.Interfaces.IOrderAppService)">
+            <summary>
+            
+            </summary>
+            <param name="appService"></param>
+        </member>
+        <member name="T:Aplicacao.API.Controllers.v1.ProductsController">
+            <summary>
+            Product
+            </summary>
+        </member>
+        <member name="M:Aplicacao.API.Controllers.v1.ProductsController.#ctor(Aplicacao.Application.Interfaces.IProductAppService)">
+            <summary>
+            
+            </summary>
+            <param name="appService"></param>
+        </member>
+        <member name="M:Aplicacao.API.Settings.SwaggerSettings.SwaggerConfigs.UseConfigureSwaggerAplicacao(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Mvc.ApiExplorer.IApiVersionDescriptionProvider)">
             <summary>
             Configura o Swagger
             </summary>
             <param name="app">Aplicação</param>
+            <param name="provider"></param>
         </member>
         <member name="T:Aplicacao.API.Startup">
             <summary>

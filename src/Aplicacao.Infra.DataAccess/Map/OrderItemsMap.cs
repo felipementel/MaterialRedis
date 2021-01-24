@@ -18,6 +18,20 @@ namespace Aplicacao.Infra.DataAccess.Map
                 .HasOne(c => c.Order)
                 .WithMany(c => c.OrderItems)
                 .HasForeignKey(c => c.OrderId);
+
+            builder
+                .Property(p => p.Quantity)
+                .HasColumnName("quantidade")
+                .HasMaxLength(300)
+                .HasColumnType<int>("int")
+                .IsRequired();
+
+            builder
+                .Property(p => p.Price)
+                .HasColumnName("preco")
+                .HasMaxLength(300)
+                .HasColumnType<decimal>("decimal(10,2)")
+                .IsRequired();
         }
     }
 }

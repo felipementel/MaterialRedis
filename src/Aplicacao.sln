@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aplicacao.API", "Aplicacao.API\Aplicacao.API.csproj", "{D60EB266-05B1-41D4-BD4C-0C2385B88761}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Presentation", "0 - Presentation", "{5BEDE0D5-9284-4E09-8A47-4ABC1E874BAE}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - AppService", "1 - AppService", "{93BDB02E-01A7-4E2E-B0B5-5B2865B955D7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Application", "2 - Application", "{F4ED3A9F-5BDB-42A7-996F-A3E453FDB1D7}"

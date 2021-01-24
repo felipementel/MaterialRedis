@@ -27,7 +27,7 @@ namespace Aplicacao.Application.Services.Access
             if (user != null && !string.IsNullOrEmpty(user.Login))
             {
                 //TODO: implementar servidor de identidade
-                if (user.Login == "mitarq" && user.AccessKey == "mitarq")
+                if (user.Login == "usuario" && user.AccessKey == "senha")
                     credentialIsValid = true;
             }
 

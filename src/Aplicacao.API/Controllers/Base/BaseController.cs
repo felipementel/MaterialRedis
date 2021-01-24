@@ -55,7 +55,6 @@ namespace Aplicacao.API.Controllers.Base
             return retorno.Any()
                 ? Ok(new
                 {
-                    success = true,
                     data = retorno,
                     tempoProcessamento = TempoProcessamento(sw)
                 })
@@ -83,7 +82,6 @@ namespace Aplicacao.API.Controllers.Base
             return retorno != null
                 ? Ok(new
                 {
-                    success = true,
                     data = retorno,
                     tempoProcessamento = TempoProcessamento(sw)
                 })
@@ -111,12 +109,13 @@ namespace Aplicacao.API.Controllers.Base
                 sw.Stop();
 
                 if (retorno != null && !retorno.ValidationResult.IsValid)
+                {
                     return BadRequest(new
                     {
-                        success = false,
                         data = retorno.ValidationResult.ToString(),
                         tempoProcessamento = TempoProcessamento(sw)
                     });
+                }
 
                 //return CreatedAtAction(nameof(Get), new { apiVersion = apiVersion.ToString(), id = retorno.Identificador }, retorno);
 
@@ -127,7 +126,6 @@ namespace Aplicacao.API.Controllers.Base
                             id = retorno.Identificador },
                         new
                         {
-                            success = true,
                             data = retorno,
                             tempoProcessamento = TempoProcessamento(sw)
                         })
@@ -158,12 +156,13 @@ namespace Aplicacao.API.Controllers.Base
                 sw.Stop();
 
                 if (retorno != null && !retorno.ValidationResult.IsValid)
+                {
                     return BadRequest(new
                     {
-                        success = false,
                         data = retorno.ValidationResult.ToString(),
                         tempoProcessamento = TempoProcessamento(sw)
                     });
+                }
 
                 return Ok(new
                 {
@@ -199,11 +198,9 @@ namespace Aplicacao.API.Controllers.Base
 
                 return Ok(new
                 {
-                    success = true,
                     data = retorno,
                     tempoProcessamento = TempoProcessamento(sw)
-
-                }); ;
+                });
             }
             return BadRequest(id);
         }

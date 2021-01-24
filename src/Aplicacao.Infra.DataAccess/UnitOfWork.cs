@@ -21,7 +21,7 @@ namespace Aplicacao.Infra.DataAccess
 
         public async Task<bool> Commit()
         {
-            if (await _context.SaveChangesAsync() > 0)
+            if (_context.SaveChanges() > 0)
                 return true; //Successful
             return false; //Not successful
         }

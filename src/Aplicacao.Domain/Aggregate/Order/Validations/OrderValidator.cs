@@ -7,7 +7,12 @@ namespace Aplicacao.Domain.Validations
     {
         public OrderValidator()
         {
-            RuleFor(n => n.Customer).SetValidator(new CustomerValidator());
+            RuleSet("new", () =>
+            {
+                RuleFor(n => n.Customer).SetValidator(new CustomerValidator());
+            });
+
+            //RuleFor(n => n.Customer).SetValidator(new CustomerValidator());
         }
     }
 }

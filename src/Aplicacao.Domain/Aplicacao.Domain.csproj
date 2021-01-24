@@ -5,12 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Interfaces\CQRS\**" />
-    <EmbeddedResource Remove="Interfaces\CQRS\**" />
-    <None Remove="Interfaces\CQRS\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Remove="Services\CustomerService_OLD.cs" />
   </ItemGroup>
 

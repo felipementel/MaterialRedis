@@ -36,7 +36,10 @@ namespace Aplicacao.Domain.Services
             if (_validator == null)
                 throw new ArgumentException($"Não foi informado o validador da classe {nameof(entity)}");
 
-            var validated = await _validator.ValidateAsync(entity);
+            var validated = await _validator.ValidateAsync(entity, strategy =>
+            {
+                strategy.IncludeRuleSets("new");
+            });
 
             entity.ValidationResult = validated;
 
@@ -52,7 +55,7 @@ namespace Aplicacao.Domain.Services
             await _uow.Commit();
 
             //TODO: PASSO 1
-            //await _redisRepository.Set(entityTemp);
+            await _redisRepository.Set(entityTemp);
 
             return entityTemp;
         }
@@ -105,7 +108,10 @@ namespace Aplicacao.Domain.Services
             if (_validator == null)
                 throw new ArgumentException($"Não foi informado o validador da classe {nameof(entity)}");
 
-            var validated = _validator.Validate(entity);
+            var validated = await _validator.ValidateAsync(entity, strategy =>
+            {
+                strategy.IncludeRuleSets("update");
+            });
 
             entity.ValidationResult = validated;
 
@@ -113,6 +119,8 @@ namespace Aplicacao.Domain.Services
             {
                 return entity;
             }
+
+            await _uow.BeginTransaction();
 
             var entityTemp = await _sqlServerRepository.Update(entity);
 
