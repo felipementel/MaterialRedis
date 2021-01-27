@@ -1,99 +1,106 @@
-# RedisNET5
+# Redis NET5
 
-Comandos 
-PM> Add-Migration Initial --p Aplicacao.Infra.DataAccess -c AplicacaoContext
-PM> Update-Database --p Aplicacao.Infra.DataAccess -c AplicacaoContext
-PM> Script-Migration -o .\Aplicacao\Initial.SQL
-PM> Script-Migration -o .\Aplicacao\Initial2.SQL -idempotent
-PM> Remove-Migration
+### Comandos para rodar o Migrations 
+> PM> Add-Migration Initial
+> 
+> PM> Update-Database
+> 
+> PM> Script-Migration -o .\Aplicacao\Initial.SQL
+> 
+> PM> Script-Migration -o .\Aplicacao\Initial2.SQL -idempotent
+> 
+> PM> Remove-Migration
 
 
-========Montar ambiente Docker (server) ========
+## Montar ambiente Docker (server)
 > docker ps -a | lista as imagens
 
 > docker pull redis
 
 > docker run --name redis-server-docker -p 6379:6379 redis 
 
-========Montar ambiente Docker (cli) ========
+## Montar ambiente Docker (cli)
 > Open new Terminal
 
 > docker exec -it redis-server-docker redis-cli
 
-========Comandos Redis ========
+# Comandos Redis
 
-> ping
+    ping
 
 ## String --> https://redis.io/commands/append
-# set e setex
+    set e setex
 
-> set <key> <value>
-> set <key> <value> EX 10s
-> get <key>
-> append <key> <value>
+    set <key> <value>
+    set <key> <value> EX 10s
+    get <key>
+    append <key> <value>
 
-> expire <key> <tempo>
+    mset <key> <value> <key> <value> | set em varias chaves e seus valores
+    mget <key> <key> <key> ... | obtem os valores das chaves solicitadas
+    
+    expire <key> <tempo>
+    
+    ttl <key>
 
-> ttl <key>
+## saber o endereço de memoria
+    dump <key>
 
-# saber o endereço de memoria
-> dump <key>
+## namespace
+    set <key>:<id> <value>
 
-> mset <key> <value> <key> <value> | set em varias chaves e seus valores
-> mget <key> <key> <key> ... | obtem os valores das chaves solicitadas
-
-##namespace
-> set <key>:<id> <value>
-
-# substring
-> getrange <key> <start> <stop>
+## substring
+    getrange <key> <start> <stop>
 
 #incrementar em caso da chave tiver um valor inteiro
-> incr <key>
+    incr <key>
 
  # para incrementar um inteiro a partir de outro valor
- > incrby <key> <value>
+    incrby <key> <value>
 
 
 ## Listas --> https://redis.io/commands/rpush
 
-(pilha e fila) ou lista
-> rpush <key> v1 v2 v3 | adiciona os valores a direita
-> lpush <key> v1 v2 v3 | adiciona os valores a esquerda
+#### (pilha e fila) ou lista
+    rpush <key> v1 v2 v3 | adiciona os valores a direita
+    lpush <key> v1 v2 v3 | adiciona os valores a esquerda
+    
+    pop | retira da fila pelo indice
+    
+    lrange <key> | tamnho da pilha
+    
+    lpop <key>
+    rpop <key>
+    
+    llen
 
-> pop | retira da fila pelo indice
+## Hash --> https://redis.io/commands/hmset * a mais utilizada
 
->lrange <key> | tamnho da pilha
-
->lpop <key>
->rpop <key>
-
-> llen
-
-## hash --> https://redis.io/commands/hmset * a mais utilizada
-
-> hset <key1> <field1> <value>
-> hset <key1> <field2> <value>
-> hkeys
-> hgetall <key>
-
-
-> hget Aplicacao-ClienteRedisRepository:1 data
-> hget Aplicacao-BasketRepository:123 data
+    hset <key1> <field1> <value>
+    hset <key1> <field2> <value>
+    hkeys
+    hgetall <key>    
+    
+    hget Aplicacao-ClienteRedisRepository:1 data
+    hget Aplicacao-BasketRepository:123 data
 ======
 
 # deletar uma chave
-> del <key>
+    del <key>
 
 # listar todas as chaves
-> keys *
+    keys *
 
 # listar chaves que contem um caracter
-> keys *caracter* | * = infinito
+    keys *caracter* | * = infinito
 
 # obter o tipo de uma chave
-> type <key>
+    type <key>
 
+# Mensageria
+
+    subscribe nomecanal
+    publish nomecanal aaaaaa
 
 ====
 Os sets em Redis representam conjuntos de valores que não se repetem. Ao fazer uma adição de um elemento já existe em um set, o comando não faz nada com o set.
@@ -121,5 +128,5 @@ redis> SMEMBERS myset
 redis> 
 ====
 
-#deletar todas as chaves
-> flushall
+# deletar todas as chaves
+    flushall

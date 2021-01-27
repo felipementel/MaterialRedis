@@ -5,7 +5,6 @@ using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -14,13 +13,13 @@ namespace Aplicacao.Infra.DataAccess.Repositories
     public class BaseRedisRepository<T, Tid> : IRedisRepository<T, Tid> where T : TEntity<Tid>
     {
         private readonly IDistributedCache _cacheRedis;
-        private DistributedCacheEntryOptions _distributedCacheEntryOptions;
+        private readonly DistributedCacheEntryOptions _distributedCacheEntryOptions;
         public BaseRedisRepository(IDistributedCache cacheRedis)
         {
             _cacheRedis = cacheRedis;
 
             _distributedCacheEntryOptions = new DistributedCacheEntryOptions();
-            _distributedCacheEntryOptions.SetSlidingExpiration(TimeSpan.FromMinutes(1));
+            _distributedCacheEntryOptions.SetSlidingExpiration(TimeSpan.FromSeconds(10));
         }
 
         public virtual async Task<T> Get(Tid key)
@@ -30,7 +29,8 @@ namespace Aplicacao.Infra.DataAccess.Repositories
 
             if (!string.IsNullOrEmpty(dadosCache))
             {
-                return System.Text.Json.JsonSerializer.Deserialize<T>(dadosCache);
+                return JsonConvert.DeserializeObject<T>(dadosCache);
+                //return System.Text.Json.JsonSerializer.Deserialize<T>(dadosCache);
             }
             else
             {
@@ -46,7 +46,7 @@ namespace Aplicacao.Infra.DataAccess.Repositories
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true,
-                PropertyNameCaseInsensitive = false,
+                PropertyNameCaseInsensitive = true,
                 IgnoreNullValues = false,
                 IgnoreReadOnlyProperties = false,
                 ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
@@ -54,8 +54,8 @@ namespace Aplicacao.Infra.DataAccess.Repositories
 
             if (!string.IsNullOrEmpty(dadosCache))
             {
-                return JsonConvert.DeserializeObject<IEnumerable<T>>(dadosCache);
-                //return JsonSerializer.Deserialize<IEnumerable<T>>(dadosCache, options);
+                //return JsonConvert.DeserializeObject<IEnumerable<T>>(dadosCache);
+                return System.Text.Json.JsonSerializer.Deserialize<IEnumerable<T>>(dadosCache, options);
             }
             else
             {
@@ -81,7 +81,7 @@ namespace Aplicacao.Infra.DataAccess.Repositories
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true,
-                PropertyNameCaseInsensitive = false,
+                PropertyNameCaseInsensitive = true,
                 IgnoreNullValues = false,
                 IgnoreReadOnlyProperties = false,
                 ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
@@ -110,7 +110,7 @@ namespace Aplicacao.Infra.DataAccess.Repositories
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true,
-                PropertyNameCaseInsensitive = false,
+                PropertyNameCaseInsensitive = true,
                 IgnoreNullValues = false,
                 IgnoreReadOnlyProperties = false,
                 ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
