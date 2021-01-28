@@ -1,6 +1,7 @@
-﻿using Aplicacao.Domain.Shared.Model;
+﻿using Aplicacao.Domain.Aggregate.Customer.Model;
+using Aplicacao.Domain.Shared.Model;
 
-namespace Aplicacao.Domain.Model
+namespace Aplicacao.Domain.ValueObject.Address
 {
     public class Address : TEntity<int>
     {

@@ -1,4 +1,4 @@
-﻿using Aplicacao.Domain.Model;
+﻿using Aplicacao.Domain.Aggregate.Order.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

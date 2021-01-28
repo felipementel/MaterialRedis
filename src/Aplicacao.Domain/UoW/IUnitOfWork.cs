@@ -4,7 +4,7 @@ namespace Aplicacao.Domain.UoW
 {
     public interface IUnitOfWork
     {
-        public Task BeginTransaction();
-        public Task<bool> Commit();
+        public void BeginTransaction();
+        public bool Commit();
     }
 }

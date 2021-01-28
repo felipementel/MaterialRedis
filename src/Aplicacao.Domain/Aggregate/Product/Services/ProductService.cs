@@ -1,12 +1,12 @@
-﻿using Aplicacao.Domain.Interfaces.Repositories;
-using Aplicacao.Domain.Interfaces.Services;
-using Aplicacao.Domain.Model;
+﻿using Aplicacao.Domain.Aggregate.Product.Interfaces.Repositories;
+using Aplicacao.Domain.Aggregate.Product.Interfaces.Services;
+using Aplicacao.Domain.Aggregate.Product.Validations;
+using Aplicacao.Domain.Services;
 using Aplicacao.Domain.UoW;
-using Aplicacao.Domain.Validations;
 
-namespace Aplicacao.Domain.Services
+namespace Aplicacao.Domain.Aggregate.Product.Services
 {
-    public class ProductService : BaseService<Product, int>, IProductService
+    public class ProductService : BaseService<Model.Product, int>, IProductService
     {
         private readonly IUnitOfWork _uow;
 

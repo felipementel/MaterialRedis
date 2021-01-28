@@ -1,9 +1,9 @@
-﻿using Aplicacao.Domain.Model;
+﻿using Aplicacao.Domain.Aggregate.Customers.Validations;
 using FluentValidation;
 
-namespace Aplicacao.Domain.Validations
+namespace Aplicacao.Domain.Aggregate.Order.Validations
 {
-    public class OrderValidator : AbstractValidator<Order>
+    public class OrderValidator : AbstractValidator<Model.Order>
     {
         public OrderValidator()
         {
@@ -11,8 +11,6 @@ namespace Aplicacao.Domain.Validations
             {
                 RuleFor(n => n.Customer).SetValidator(new CustomerValidator());
             });
-
-            //RuleFor(n => n.Customer).SetValidator(new CustomerValidator());
         }
     }
 }

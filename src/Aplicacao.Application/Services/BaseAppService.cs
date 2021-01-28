@@ -24,6 +24,7 @@ namespace Aplicacao.Application.Services
             var itemMap = _mapper.Map<D, T>(itemDTO);
             var item = await _baseService.Add(itemMap);
             itemDTO = _mapper.Map<T, D>(item);
+
             return itemDTO;
         }
 
@@ -31,6 +32,7 @@ namespace Aplicacao.Application.Services
         {
             var retorno = await _baseService.Get(tid);
             var res = retorno;
+
             return _mapper.Map<T, D>(res);
         }
 
@@ -38,6 +40,7 @@ namespace Aplicacao.Application.Services
         {
             var retorno = await _baseService.GetAll();
             var res = retorno;
+
             return _mapper.Map<IEnumerable<T>, IEnumerable<D>>(res);
         }
 

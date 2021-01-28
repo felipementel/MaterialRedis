@@ -2,7 +2,7 @@
 using Aplicacao.Domain.Shared.Model;
 using Aplicacao.Infra.DataAccess.Repositories.Redis;
 using Microsoft.Extensions.Caching.Distributed;
-using Newtonsoft.Json;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -14,12 +14,17 @@ namespace Aplicacao.Infra.DataAccess.Repositories
     {
         private readonly IDistributedCache _cacheRedis;
         private readonly DistributedCacheEntryOptions _distributedCacheEntryOptions;
-        public BaseRedisRepository(IDistributedCache cacheRedis)
+        public BaseRedisRepository(
+            IDistributedCache cacheRedis,
+            IConfiguration configuration)
         {
             _cacheRedis = cacheRedis;
 
             _distributedCacheEntryOptions = new DistributedCacheEntryOptions();
-            _distributedCacheEntryOptions.SetSlidingExpiration(TimeSpan.FromSeconds(10));
+            _distributedCacheEntryOptions.SetSlidingExpiration(
+                TimeSpan.FromSeconds(
+                    Int32.Parse(
+                        configuration["cacheSecondTimeout"])));
         }
 
         public virtual async Task<T> Get(Tid key)
@@ -28,9 +33,8 @@ namespace Aplicacao.Infra.DataAccess.Repositories
                 $"{nameof(CustomerRedisRepository)}:{key}");
 
             if (!string.IsNullOrEmpty(dadosCache))
-            {
-                return JsonConvert.DeserializeObject<T>(dadosCache);
-                //return System.Text.Json.JsonSerializer.Deserialize<T>(dadosCache);
+            {               
+                return JsonSerializer.Deserialize<T>(dadosCache);
             }
             else
             {
@@ -54,8 +58,7 @@ namespace Aplicacao.Infra.DataAccess.Repositories
 
             if (!string.IsNullOrEmpty(dadosCache))
             {
-                //return JsonConvert.DeserializeObject<IEnumerable<T>>(dadosCache);
-                return System.Text.Json.JsonSerializer.Deserialize<IEnumerable<T>>(dadosCache, options);
+                return JsonSerializer.Deserialize<IEnumerable<T>>(dadosCache, options);
             }
             else
             {
@@ -70,14 +73,6 @@ namespace Aplicacao.Infra.DataAccess.Repositories
 
         public async Task Set(T dadosCache)
         {
-            //var dadosJson = JsonConvert.SerializeObject(
-            //    dadosCache,
-            //    Formatting.Indented,
-            //    new JsonSerializerSettings
-            //{
-            //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            //});
-
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true,
@@ -87,7 +82,7 @@ namespace Aplicacao.Infra.DataAccess.Repositories
                 ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
             };
 
-            var dadosJson = System.Text.Json.JsonSerializer.Serialize(
+            var dadosJson = JsonSerializer.Serialize(
                 dadosCache, options);
 
             await _cacheRedis.SetStringAsync(
@@ -98,15 +93,6 @@ namespace Aplicacao.Infra.DataAccess.Repositories
 
         public async Task Setm(IEnumerable<T> dadosCache)
         {
-            //var dadosJson = JsonConvert
-            //    .SerializeObject(
-            //    dadosCache,
-            //    Formatting.Indented, 
-            //    new JsonSerializerSettings
-            //{
-            //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            //});
-
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true,
@@ -116,9 +102,8 @@ namespace Aplicacao.Infra.DataAccess.Repositories
                 ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
             };
 
-            var dadosJson = System.Text.Json.JsonSerializer.Serialize(
-                dadosCache,
-                options);
+            var dadosJson = JsonSerializer.Serialize(
+                dadosCache, options);
 
             await _cacheRedis.SetStringAsync(
                 $"{nameof(CustomerRedisRepository)}",

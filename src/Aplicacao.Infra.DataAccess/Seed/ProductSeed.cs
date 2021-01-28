@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Aplicacao.Domain.Aggregate.Product.Model;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Aplicacao.Domain.Model;
 using System;
 
 namespace Aplicacao.Infra.DataAccess.Seed

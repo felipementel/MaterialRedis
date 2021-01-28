@@ -1,6 +1,8 @@
-﻿using Aplicacao.Domain.Model;
+﻿using Aplicacao.Domain.Aggregate.Customer.Model;
+using Aplicacao.Domain.Aggregate.Order.Model;
+using Aplicacao.Domain.Aggregate.Product.Model;
+using Aplicacao.Domain.ValueObject.Address;
 using Aplicacao.Infra.DataAccess.Map;
-using Aplicacao.Infra.DataAccess.Seed;
 using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;

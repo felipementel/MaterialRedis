@@ -1,7 +1,7 @@
 ﻿using Aplicacao.Application.DTOs;
 using Aplicacao.Application.Interfaces;
-using Aplicacao.Domain.Interfaces.Services;
-using Aplicacao.Domain.Model;
+using Aplicacao.Domain.Aggregate.Order.Interfaces.Services;
+using Aplicacao.Domain.Aggregate.Order.Model;
 using AutoMapper;
 
 namespace Aplicacao.Application.Services

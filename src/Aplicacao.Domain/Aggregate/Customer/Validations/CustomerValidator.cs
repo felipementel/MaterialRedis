@@ -1,9 +1,9 @@
-﻿using Aplicacao.Domain.Model;
+﻿using Aplicacao.Domain.ValueObject.Address.Validations;
 using FluentValidation;
 
-namespace Aplicacao.Domain.Validations
+namespace Aplicacao.Domain.Aggregate.Customers.Validations
 {
-    public class CustomerValidator : AbstractValidator<Customer>
+    public class CustomerValidator : AbstractValidator<Customer.Model.Customer>
     {
         public CustomerValidator()
         {

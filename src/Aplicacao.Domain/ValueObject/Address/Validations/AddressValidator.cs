@@ -1,7 +1,7 @@
-﻿using Aplicacao.Domain.Model;
+﻿using Aplicacao.Domain.ValueObject.Address;
 using FluentValidation;
 
-namespace Aplicacao.Domain.Validations
+namespace Aplicacao.Domain.ValueObject.Address.Validations
 {
     public class AddressValidator : AbstractValidator<Address>
     {

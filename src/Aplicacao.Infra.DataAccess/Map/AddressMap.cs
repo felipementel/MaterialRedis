@@ -1,4 +1,4 @@
-﻿using Aplicacao.Domain.Model;
+﻿using Aplicacao.Domain.ValueObject.Address;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

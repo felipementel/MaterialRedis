@@ -1,9 +1,6 @@
-﻿using Aplicacao.Domain.Model;
+﻿using Aplicacao.Domain.Interfaces.Repositories;
 
-namespace Aplicacao.Domain.Interfaces.Repositories
+namespace Aplicacao.Domain.Aggregate.Customers.Interfaces.Repositories
 {
-    public interface ICustomerRedisRepository : IRedisRepository<Customer, int>
-    {
-
-    }
+    public interface ICustomerRedisRepository : IRedisRepository<Customer.Model.Customer, int> { }
 }

@@ -1,6 +1,6 @@
 ﻿using Aplicacao.Domain.Shared.Model;
 
-namespace Aplicacao.Domain.Model
+namespace Aplicacao.Domain.Aggregate.Order.Model
 {
     public class OrderItems : TEntity<int>
     {
@@ -16,7 +16,7 @@ namespace Aplicacao.Domain.Model
 
         public int ProductId { get; set; }
 
-        public Product Product { get; set; }
+        public Product.Model.Product Product { get; set; }
 
         public Order Order { get; set; }
 

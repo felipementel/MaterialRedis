@@ -48,13 +48,12 @@ namespace Aplicacao.Domain.Services
                 return entity;
             }
 
-            //await _uow.BeginTransaction();
+            _uow.BeginTransaction();
 
             var entityTemp = await _sqlServerRepository.Create(entity);
 
-            await _uow.Commit();
+            _uow.Commit();
 
-            //TODO: PASSO 1
             await _redisRepository.Set(entityTemp);
 
             return entityTemp;
@@ -66,12 +65,12 @@ namespace Aplicacao.Domain.Services
 
             await _redisRepository.Remove(tid);
 
-            return await _uow.Commit();
+            return _uow.Commit();
         }
 
         public virtual async Task<T> Get(Tid tid)
         {
-            //TODO: Performance
+            //TODO: Cache A-Side Pattern
             var tempEntity = await _redisRepository.Get(tid);
 
             if (tempEntity != null)
@@ -120,11 +119,11 @@ namespace Aplicacao.Domain.Services
                 return entity;
             }
 
-            await _uow.BeginTransaction();
+            _uow.BeginTransaction();
 
             var entityTemp = await _sqlServerRepository.Update(entity);
 
-            await _uow.Commit();
+            _uow.Commit();
 
             await _redisRepository.Set(entityTemp);
 

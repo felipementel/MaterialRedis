@@ -1,9 +1,6 @@
-﻿using Aplicacao.Domain.Model;
+﻿using Aplicacao.Domain.Interfaces.Repositories;
 
-namespace Aplicacao.Domain.Interfaces.Repositories
+namespace Aplicacao.Domain.Aggregate.Order.Interfaces.Repositories
 {
-    public interface IOrderRedisRepository : IRedisRepository<Order, int>
-    {
-
-    }
+    public interface IOrderRedisRepository : IRedisRepository<Model.Order, int> { }
 }

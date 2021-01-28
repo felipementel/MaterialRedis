@@ -14,12 +14,12 @@ namespace Aplicacao.Infra.DataAccess
             _context = context;
         }
 
-        public async Task BeginTransaction()
+        public void BeginTransaction()
         {
-            await _context.Database.BeginTransactionAsync();
+            //_context.Database.BeginTransaction();
         }
 
-        public async Task<bool> Commit()
+        public bool Commit()
         {
             if (_context.SaveChanges() > 0)
                 return true; //Successful

@@ -1,6 +1,6 @@
 ﻿using Aplicacao.Domain.Shared.Enums;
 
-namespace Aplicacao.Domain.ValueObject
+namespace Aplicacao.Domain.ValueObject.PrimitiveObsession
 {
     public class Document : Domain.Shared.ValueObject
     {

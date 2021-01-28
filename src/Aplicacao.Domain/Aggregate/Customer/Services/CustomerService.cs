@@ -1,13 +1,12 @@
-﻿using Aplicacao.Domain.Interfaces.Repositories;
-using Aplicacao.Domain.Interfaces.Services;
-using Aplicacao.Domain.Model;
+﻿using Aplicacao.Domain.Aggregate.Customers.Interfaces.Repositories;
+using Aplicacao.Domain.Aggregate.Customers.Interfaces.Services;
+using Aplicacao.Domain.Aggregate.Customers.Validations;
+using Aplicacao.Domain.Services;
 using Aplicacao.Domain.UoW;
-using Aplicacao.Domain.Validations;
-using System.Threading.Tasks;
 
-namespace Aplicacao.Domain.Services
+namespace Aplicacao.Domain.Aggregate.Customers.Services
 {
-    public class CustomerService : BaseService<Customer, int>, ICustomerService
+    public class CustomerService : BaseService<Customer.Model.Customer, int>, ICustomerService
     {
         private readonly IUnitOfWork _uow;
 

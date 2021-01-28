@@ -1,8 +1,9 @@
 ﻿using Aplicacao.Domain.Shared.Model;
+using Aplicacao.Domain.ValueObject.Address;
 using System;
 using System.Collections.Generic;
 
-namespace Aplicacao.Domain.Model
+namespace Aplicacao.Domain.Aggregate.Customer.Model
 {
     public class Customer : TEntity<int>
     {

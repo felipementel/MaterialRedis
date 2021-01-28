@@ -1,9 +1,6 @@
-﻿using Aplicacao.Domain.Model;
+﻿using Aplicacao.Domain.Interfaces.Repositories;
 
-namespace Aplicacao.Domain.Interfaces.Repositories
+namespace Aplicacao.Domain.Aggregate.Customers.Interfaces.Repositories
 {
-    public interface ICustomerSQLServerRepository : ISQLRepository<Customer, int>
-    {
-
-    }
+    public interface ICustomerSQLServerRepository : ISQLRepository<Customer.Model.Customer, int> { }
 }

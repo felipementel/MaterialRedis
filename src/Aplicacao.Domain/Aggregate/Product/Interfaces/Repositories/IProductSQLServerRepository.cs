@@ -1,9 +1,7 @@
-﻿using Aplicacao.Domain.Model;
+﻿using Aplicacao.Domain.Aggregate.Product.Model;
+using Aplicacao.Domain.Interfaces.Repositories;
 
-namespace Aplicacao.Domain.Interfaces.Repositories
+namespace Aplicacao.Domain.Aggregate.Product.Interfaces.Repositories
 {
-    public interface IProductSQLServerRepository : ISQLRepository<Product, int>
-    {
-
-    }
+    public interface IProductSQLServerRepository : ISQLRepository<Model.Product, int> { }
 }

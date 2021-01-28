@@ -1,9 +1,6 @@
-﻿using Aplicacao.Domain.Model;
+﻿using Aplicacao.Domain.Interfaces.Services;
 
-namespace Aplicacao.Domain.Interfaces.Services
+namespace Aplicacao.Domain.Aggregate.Order.Interfaces.Services
 {
-    public interface IOrderService : IService<Order, int> 
-    {
-    
-    }
+    public interface IOrderService : IService<Model.Order, int> { }
 }

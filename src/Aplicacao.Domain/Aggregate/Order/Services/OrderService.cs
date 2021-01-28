@@ -1,14 +1,16 @@
-﻿using Aplicacao.Domain.Interfaces.Repositories;
-using Aplicacao.Domain.Interfaces.Services;
-using Aplicacao.Domain.Model;
+﻿using Aplicacao.Domain.Aggregate.Customers.Interfaces.Repositories;
+using Aplicacao.Domain.Aggregate.Order.Interfaces.Repositories;
+using Aplicacao.Domain.Aggregate.Order.Interfaces.Services;
+using Aplicacao.Domain.Aggregate.Order.Validations;
+using Aplicacao.Domain.Aggregate.Product.Interfaces.Repositories;
+using Aplicacao.Domain.Services;
 using Aplicacao.Domain.UoW;
-using Aplicacao.Domain.Validations;
 using FluentValidation.Results;
 using System.Threading.Tasks;
 
-namespace Aplicacao.Domain.Services
+namespace Aplicacao.Domain.Aggregate.Order.Services
 {
-    public class OrderService : BaseService<Order, int>, IOrderService
+    public class OrderService : BaseService<Model.Order, int>, IOrderService
     {
         private readonly IUnitOfWork _uow;
 
@@ -39,7 +41,7 @@ namespace Aplicacao.Domain.Services
             _productSQLServerRepository = productSQLServerRepository;
         }
 
-        public override async Task<Order> Add(Order entity)
+        public override async Task<Model.Order> Add(Model.Order entity)
         {
             var idCustomer = entity.Customer.Id;
             entity.Customer = await _customerSQLServerRepository.ReadById(idCustomer);
@@ -51,7 +53,7 @@ namespace Aplicacao.Domain.Services
 
             foreach (var item in entity.OrderItems)
             {
-                Product product = await _productSQLServerRepository.ReadById(item.ProductId);
+                Product.Model.Product product = await _productSQLServerRepository.ReadById(item.ProductId);
 
                 if (product is null)
                 {
@@ -60,7 +62,9 @@ namespace Aplicacao.Domain.Services
             }
 
             if (entity.ValidationResult.Errors.Count > 0)
+            {
                 return entity;
+            }
 
             return await base.Add(entity);
         }

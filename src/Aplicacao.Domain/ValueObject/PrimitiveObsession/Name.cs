@@ -1,4 +1,4 @@
-﻿namespace Aplicacao.Domain.ValueObject
+﻿namespace Aplicacao.Domain.ValueObject.PrimitiveObsession
 {
     public class Name : Domain.Shared.ValueObject
     {

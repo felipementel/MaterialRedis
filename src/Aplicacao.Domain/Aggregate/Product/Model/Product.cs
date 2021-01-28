@@ -1,6 +1,6 @@
 ﻿using Aplicacao.Domain.Shared.Model;
 
-namespace Aplicacao.Domain.Model
+namespace Aplicacao.Domain.Aggregate.Product.Model
 {
     public class Product : TEntity<int>
     {

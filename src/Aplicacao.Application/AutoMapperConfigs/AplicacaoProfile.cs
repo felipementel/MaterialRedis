@@ -1,7 +1,9 @@
 ﻿using Aplicacao.Application.DTOs;
-using Aplicacao.Domain.Model;
+using Aplicacao.Domain.Aggregate.Customer.Model;
+using Aplicacao.Domain.Aggregate.Order.Model;
+using Aplicacao.Domain.Aggregate.Product.Model;
+using Aplicacao.Domain.ValueObject.Address;
 using AutoMapper;
-using System.Linq;
 
 namespace Aplicacao.Application.AutoMapperConfigs
 {

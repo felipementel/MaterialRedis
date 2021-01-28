@@ -1,7 +1,7 @@
 ﻿using Aplicacao.Domain.Shared.Model;
 using System.Collections.Generic;
 
-namespace Aplicacao.Domain.Model
+namespace Aplicacao.Domain.Aggregate.Order.Model
 {
     public class Order : TEntity<int>
     {
@@ -11,7 +11,7 @@ namespace Aplicacao.Domain.Model
         //    OrderItems = orderItems;
         //}
 
-        public virtual Customer Customer { get; set; }
+        public virtual Customer.Model.Customer Customer { get; set; }
 
         public virtual ICollection<OrderItems> OrderItems { get; set; }
     }
