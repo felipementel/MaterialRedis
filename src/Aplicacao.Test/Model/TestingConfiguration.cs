@@ -1,7 +1,7 @@
 ﻿namespace Finjan.Integracao.Dynamics.Tests.Model
 {
     public class TestingConfiguration
-    {
+    { 
         public bool IsDesenv { get; set; }
         public string Scheme { get; set; }
         public string Host { get; set; }
