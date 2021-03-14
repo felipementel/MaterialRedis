@@ -1,3 +1,4 @@
+using Aplicacao.API.FilterType;
 using Aplicacao.API.Settings.ControllerSettings;
 using Aplicacao.API.Settings.SwaggerSettings;
 using Aplicacao.Infra.CrossCutting;
@@ -56,7 +57,10 @@ namespace Aplicacao.API
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddControllers()
+                .AddControllers(opt => 
+                {
+                    opt.Filters.Add<ExceptionFilter>();
+                })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                 .AddJsonOptions(opt =>
                 {
@@ -124,13 +128,13 @@ namespace Aplicacao.API
             services
                 .AddDbContext<DbContext, AplicacaoContext>(opt => opt
                 .UseSqlServer(_configuration.GetConnectionString("AzureDatabase")
-                , options =>
+                ,options =>
                 {
                     options
-                    //.EnableRetryOnFailure(
-                    //    maxRetryCount: 3,
-                    //    maxRetryDelay: TimeSpan.FromSeconds(4),
-                    //    errorNumbersToAdd: null)
+                    .EnableRetryOnFailure(
+                        maxRetryCount: 3,
+                        maxRetryDelay: TimeSpan.FromSeconds(4),
+                        errorNumbersToAdd: null)
                     .MigrationsHistoryTable("MigracoesEFAplicacao", "dbo");
                 }
                 )
@@ -232,6 +236,7 @@ namespace Aplicacao.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                //app.UseDatabaseErrorPage();
             }
             else
             {

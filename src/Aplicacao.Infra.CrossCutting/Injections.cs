@@ -81,7 +81,6 @@ namespace Aplicacao.Infra.CrossCutting
 
             services.AddSingleton(signingConfigurations);
 
-            ///TODO Core
             services.AddAuthentication(authOptions =>
             {
                 authOptions.DefaultAuthenticateScheme = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme;

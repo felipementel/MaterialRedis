@@ -66,7 +66,7 @@ namespace Aplicacao.Infra.DataAccess.Repositories
             }
         }
 
-        public async Task Remove(Tid key)
+        public void Remove(Tid key)
         {
             _cacheRedis.Remove($"{nameof(CustomerRedisRepository)}:{key}");
         }

@@ -1,0 +1,52 @@
+# ❯ docker-compose -f .\docker-compose.yaml up --build
+# > docker exec -it redis-vale redis-cli -h 127.0.0.1 -p 6379 -a Psw5971! 
+
+version: '3.8'
+
+services:
+  # api-material-redis:
+  #   build: 
+  #     dockerfile: Aplicacao.API/Dockerfile
+  #     context: .
+  #   image: api-material-redis
+  #   container_name: api-material-redis
+  #   ports: 
+  #     - 5001:5001
+  #   networks:
+  #     - material-redis-network
+
+  redis:
+    image: redis:6.0.10-alpine
+    restart: always
+    container_name: redis-exemplo
+    command: redis-server --requirepass Psw5971!
+    ports:
+      - "6379:6379"
+    volumes:
+      - /mnt/c/temp/redis-data:/var/lib/redis
+      - /mnt/c/temp/redis.conf:/usr/local/etc/redis/redis.conf
+    environment:
+     - REDIS_REPLICATION_MODE=master
+    networks: 
+      - material-redis-network
+
+  sql-2019:
+    image: mcr.microsoft.com/mssql/server:2019-CU9-ubuntu-16.04
+    hostname: sql-2019
+    container_name: sql-2019
+    restart: always
+    ports:
+      - "1433:1433"
+    environment:
+      - SA_PASSWORD=Pass@word
+      - ACCEPT_EULA=Y
+      - MSSQL_PID=Developer
+      - TZ=UTC
+    # volumes:
+    #   - /mnt/c/temp/sql-database-redis:/var/opt/mssql
+    networks: 
+      - material-redis-network
+
+networks: 
+    material-redis-network:
+      driver: bridge
