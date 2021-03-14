@@ -6,6 +6,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Aplicacao.API.Middleware;
 
 namespace Aplicacao.API.Settings.ControllerSettings
 {
@@ -60,6 +61,8 @@ namespace Aplicacao.API.Settings.ControllerSettings
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseMiddleware<CorrelationIdMiddleware>();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints
@@ -72,6 +75,7 @@ namespace Aplicacao.API.Settings.ControllerSettings
                     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
                 });
             });
+
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Aplicacao.Domain.Services
         public BaseService(
             IUnitOfWork uow,
             ISQLRepository<T, Tid> sqlServerRepository,
-            IRedisRepository<T, Tid> redisRepository, 
+            IRedisRepository<T, Tid> redisRepository,
             AbstractValidator<T> validator)
         {
             _uow = uow;
@@ -63,7 +63,7 @@ namespace Aplicacao.Domain.Services
         {
             await _sqlServerRepository.Delete(tid);
 
-            await _redisRepository.Remove(tid);
+            _redisRepository.Remove(tid);
 
             return _uow.Commit();
         }
@@ -97,7 +97,8 @@ namespace Aplicacao.Domain.Services
 
             tempEntity = await _sqlServerRepository.ReadAll();
 
-            await _redisRepository.Setm(tempEntity);
+            if (tempEntity is not null)
+                await _redisRepository.Setm(tempEntity);
 
             return tempEntity;
         }

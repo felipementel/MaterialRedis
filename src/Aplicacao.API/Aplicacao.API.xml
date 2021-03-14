@@ -42,7 +42,7 @@
             <summary>
             Atualização do objeto
             </summary>
-            <param name='t'>Objeto </param>
+            <param name='t'>Objeto</param>
         </member>
         <member name="M:Aplicacao.API.Controllers.Base.BaseController`2.Delete(`1)">
             <summary>

@@ -14,6 +14,6 @@ namespace Aplicacao.Domain.Interfaces.Repositories
 
         Task<T> Get(Tid key);
 
-        Task Remove(Tid key);
+        void Remove(Tid key);
     }
 }

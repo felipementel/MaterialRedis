@@ -1,4 +1,5 @@
-﻿using Aplicacao.Application.DTOs;
+﻿using Aplicacao.API.FilterType;
+using Aplicacao.Application.DTOs;
 using Aplicacao.Application.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -58,7 +59,7 @@ namespace Aplicacao.API.Controllers.Base
                     data = retorno,
                     tempoProcessamento = TempoProcessamento(sw)
                 })
-                : (IActionResult)NoContent();
+                : (IActionResult)NotFound();
         }
 
         /// <summary>
@@ -98,6 +99,7 @@ namespace Aplicacao.API.Controllers.Base
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [TypeFilter(typeof(ExceptionFilter))]
         public virtual async Task<IActionResult> Post([FromBody] T t, ApiVersion apiVersion)
         {
             if (ModelState.IsValid)
@@ -108,14 +110,14 @@ namespace Aplicacao.API.Controllers.Base
 
                 sw.Stop();
 
-                if (retorno != null && !retorno.ValidationResult.IsValid)
-                {
-                    return BadRequest(new
-                    {
-                        data = retorno.ValidationResult.ToString(),
-                        tempoProcessamento = TempoProcessamento(sw)
-                    });
-                }
+                //if (retorno != null && !retorno.ValidationResult.IsValid)
+                //{
+                //    return BadRequest(new
+                //    {
+                //        data = retorno.ValidationResult.ToString(),
+                //        tempoProcessamento = TempoProcessamento(sw)
+                //    });
+                //}
 
                 //return CreatedAtAction(nameof(Get), new { apiVersion = apiVersion.ToString(), id = retorno.Identificador }, retorno);
 
@@ -138,7 +140,7 @@ namespace Aplicacao.API.Controllers.Base
         ///<summary>
         ///Atualização do objeto
         ///</summary>
-        ///<param name='t'>Objeto </param>
+        ///<param name='t'>Objeto</param>
         //[ApiExplorerSettings(IgnoreApi = true)]
         //[Authorize("Bearer")]
         [HttpPut]
