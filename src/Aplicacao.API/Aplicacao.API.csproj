@@ -8,10 +8,11 @@
     <Version>0.9.1.0</Version>
     <Copyright>Felipe Augusto</Copyright>
     <StartupObject>Aplicacao.API.Program</StartupObject>
+   <ProjectGuid>{E2CEBBAF-6DF7-41E9-815D-9AD4CF90C844}</ProjectGuid>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\Felipe\Desktop\MaterialRedis\src\Aplicacao.API\Aplicacao.API.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\Felipe\Desktop\MaterialRedis\src\Aplicacao.API\Aplicacao.API.xml</DocumentationFile>   
   </PropertyGroup>
 
   <ItemGroup>
