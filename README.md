@@ -1,6 +1,6 @@
 # Redis NET5
 
-docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=abc123456&' -p 1433:1433 --name sqlserver -d mcr.microsoft.com/mssql/server:2017-latest 
+docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=<YOUR_PASSWORD>' -p 1433:1433 --name sqlserver -d mcr.microsoft.com/mssql/server:2017-latest 
 
 ### Comandos para rodar o Migrations 
 > PM> Add-Migration Initial

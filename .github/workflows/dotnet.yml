@@ -21,9 +21,21 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
+        
     - name: Restore dependencies
       run: dotnet restore
+      
     - name: Build
       run: dotnet build --no-restore
-#    - name: Test
-#      run: dotnet test --no-build --verbosity normal
+      
+   # - name: Test
+   #   run: dotnet test --no-build --verbosity normal
+
+    - name: DotNet Publish
+      run: dotnet publish --configuration Release -o ${{ github.workspace }}/package
+      
+    - name: Upload
+      uses: actions/upload-artifact@v1
+      with: 
+        name: app
+        path: ${{ github.workspace }}/package

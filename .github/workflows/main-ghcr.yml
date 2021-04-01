@@ -1,0 +1,43 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  #workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: azure/docker-login@v1
+        with:
+          login-server: ghcr.io
+          username: 'felipementel'
+          password: ${{ secrets.GH_PACKAGES_TOKEN }}
+
+      - name: Build the Docker image
+        run: |
+         docker build . --file Dockerfile --tag ghcr.io/felipementel/material-redis:${{ github.sha }}
+         docker tag ghcr.io/felipementel/material-redis:${{ github.sha }} ghcr.io/felipementel/material-redis:latest
+      
+      - name: Docker Push
+        run: |
+         docker push ghcr.io/felipementel/material-redis:${{ github.sha }}
+         docker push ghcr.io/felipementel/material-redis:latest
+
+      - uses: azure/aks-set-context@v1
+        with:
+            creds: '${{ secrets.AZURE_CREDENTIALS }}' # Azure credentials
+            resource-group: 'rg-felipementel-shared'
+            cluster-name: 'felipementel-dev'
+
+      - uses: Azure/k8s-deploy@v1
+        with:
+          manifests: |
+            deployment-manifest.yml
+            service-manifest.yml
