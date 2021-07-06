@@ -62,13 +62,6 @@ namespace Aplicacao.API
                     opt.Filters.Add<ExceptionFilter>();
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
-                .AddJsonOptions(opt =>
-                {
-                    var serializerOptions = opt.JsonSerializerOptions;
-                    serializerOptions.IgnoreNullValues = true;
-                    serializerOptions.IgnoreReadOnlyProperties = false;
-                    serializerOptions.WriteIndented = true;
-                })
                 .AddNewtonsoftJson(options =>
                 {
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
